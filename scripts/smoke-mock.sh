@@ -9,11 +9,11 @@ set +a
 
 image="${IMAGE:-$DEFAULT_IMAGE}"
 model="${MODEL:-cyijun2k/glm-5.3-flash-tiny-random-nvfp4}"
-name="glm53-gb10-mock-smoke"
+name="${NAME:-glm53-gb10-mock-smoke-$$}"
 port="${PORT:-18000}"
 
 docker_args=(
-  --rm --name "$name"
+  --detach --name "$name"
   --gpus all
   --ipc=host
   --publish "$port:8000"
@@ -48,11 +48,11 @@ if [[ "${MTP:-0}" == 1 ]]; then
 fi
 
 cleanup() {
-  docker stop --time 15 "$name" >/dev/null 2>&1 || true
+  docker rm --force --volumes "$name" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
 
-docker run "${docker_args[@]}" "$image" "${serve_args[@]}" &
+docker run "${docker_args[@]}" "$image" "${serve_args[@]}" >/dev/null
 
 healthy=0
 for _ in $(seq 1 180); do
@@ -60,8 +60,9 @@ for _ in $(seq 1 180); do
     healthy=1
     break
   fi
-  if ! docker inspect "$name" >/dev/null 2>&1; then
+  if [[ "$(docker inspect --format '{{.State.Running}}' "$name")" != true ]]; then
     echo "vLLM container exited before health check" >&2
+    docker logs "$name" >&2
     exit 1
   fi
   sleep 2
