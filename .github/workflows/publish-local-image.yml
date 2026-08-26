@@ -20,7 +20,7 @@ concurrency:
 jobs:
   publish:
     runs-on: [self-hosted, linux, ARM64, dgx-spark]
-    timeout-minutes: 30
+    timeout-minutes: 90
     env:
       TARGET_IMAGE: ghcr.io/${{ github.repository }}:vllm-glm53-sm121
       SHA_IMAGE: ghcr.io/${{ github.repository }}:sha-${{ github.sha }}

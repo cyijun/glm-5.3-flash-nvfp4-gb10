@@ -11,6 +11,7 @@ two-GB10/TP=2 validation before this image should be described as production
 ready for the full model.
 
 - Runtime image: `ghcr.io/cyijun/glm-5.3-flash-nvfp4-gb10:vllm-glm53-sm121`
+- Immutable image: `ghcr.io/cyijun/glm-5.3-flash-nvfp4-gb10@sha256:4251b561d111d817765ed4097512ce36811deac071a4a7411d20242df5c74a47`
 - Mock model: [`cyijun2k/glm-5.3-flash-tiny-random-nvfp4`](https://huggingface.co/cyijun2k/glm-5.3-flash-tiny-random-nvfp4)
 - Upstream checkpoint: [`LibertAIDAI/GLM-5.3-Flash-NVFP4`](https://huggingface.co/LibertAIDAI/GLM-5.3-Flash-NVFP4)
 
@@ -86,6 +87,9 @@ FlashInfer, and Transformers versions are checked during every build. The base
 ships the sparse module as an AOT `.so`, so changing only Python/JIT source is
 not sufficient—the Docker build deliberately recompiles and replaces that
 module.
+
+The published manifest is public and also carries immutable source tag
+`sha-5bb0a598829839a9e0c420c6b737a742e084948c`.
 
 ## Validation boundary
 

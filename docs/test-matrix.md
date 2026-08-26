@@ -9,6 +9,7 @@ Validated on 2026-08-27 with one NVIDIA GB10 (SM121). The source fixture is
 | target/mock config schema | pass | 21/21 critical fields; 5,342/5,342 fixture names map to target tensors |
 | NVFP4 schema | pass | 1,728 projections; `U8` / `F8_E4M3` / `F32` storage |
 | AOT source and binary build contract | pass | H=64/top-k=2176 decode and GLM_NSA prefill present; rebuilt for `sm_121a` |
+| public GHCR manifest | pass | `sha256:4251b561d111d817765ed4097512ce36811deac071a4a7411d20242df5c74a47`; anonymous manifest inspection succeeds |
 | faithful mock load | pass | ~0.64 GiB model memory; sparse SM120 backend and `fp8_ds_mla` selected |
 | health and models APIs | pass | HTTP 200 |
 | short chat/decode | pass | 19 prompt + 8 generated tokens; HTTP 200 |

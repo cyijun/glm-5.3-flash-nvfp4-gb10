@@ -15,6 +15,12 @@ MTP。完整模型权重约 181 GiB，单台 GB10 放不下，完整模型仍需
 ghcr.io/cyijun/glm-5.3-flash-nvfp4-gb10:vllm-glm53-sm121
 ```
 
+公开镜像的不可变 digest：
+
+```text
+ghcr.io/cyijun/glm-5.3-flash-nvfp4-gb10@sha256:4251b561d111d817765ed4097512ce36811deac071a4a7411d20242df5c74a47
+```
+
 ## 关键修改
 
 GLM-5.3 在逻辑上是 NoPE（NoPE/RoPE 为 256/0），但当前 FlashInfer
